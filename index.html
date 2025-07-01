@@ -3,9 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>JavaScript Example</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: blueviolet;
+            text-align: center;
+        }
+        
+        input, button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            border: 0.25rem solid blueviolet;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+            box-sizing: border-box;
+        }
+        
+        input {
+            background-color: aqua;
+            text-align: center;
+            color: blueviolet;
+            outline: none;
+        }
+        
+        input::placeholder {
+            color: rgba(138, 43, 226, 0.6);
+        }
+        
+        input:hover, button:hover {
+            background-color: blueviolet;
+            border-color: aqua;
+            color: aqua;
+            cursor: pointer;
+        }
+        
+        input:focus, input:active {
+            background-color: blueviolet;
+            border-color: aqua;
+            color: aqua;
+            transform: scale(0.98);
+        }
+        
+        button {
+            background-color: aqua;
+            color: blueviolet;
+        }
+        
+        button:active {
+            transform: scale(0.98);
+            background-color: rgb(101, 44, 173);
+        }
+    </style>
 </head>
 <body>
+    <div class="main">
+        <h1>Hello JavaScript</h1>
+        <input type="text" placeholder="Enter something...">
+        <button>Check input</button>
+    </div>
     <script src="/Script.js"></script>
 </body>
 </html>

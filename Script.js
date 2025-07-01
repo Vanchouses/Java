@@ -105,3 +105,101 @@ function printList(list) {
 }
 
 printList(list);*/
+
+//Замыкание
+
+//Задача 1
+
+/*function sum (a) {
+  return function sum (b) {
+    return a + b;
+  }
+}
+
+alert(sum(3)(5));*/
+
+//Задача 2
+
+/*function inBetween (a, b) {
+  return function (x) {
+    return x >= a && x <= b;
+  };
+}
+
+function inArray (array) {
+  return function (x) {
+    return array.includes(x);
+  }
+}
+
+let arr = [1, 2, 3, 4, 5, 6, 7];
+
+alert( arr.filter(inBetween(3, 6)) ); // 3,4,5,6
+
+alert( arr.filter(inArray([1, 2, 10])) ); //1, 2*/
+
+//Задача 3
+
+/*let users = [
+  { name: "Иван", age: 20, surname: "Иванов" },
+  { name: "Пётр", age: 18, surname: "Петров" },
+  { name: "Анна", age: 19, surname: "Каренина" }
+];
+
+function byField (field) {
+  return (a, b) => a[field] > b[field] ? 1 : -1
+}
+
+users.sort(byField('name'));
+users.sort(byField('age'));
+
+users.forEach(user => console.log(user.name));*/
+
+//Задача 4
+
+/*function makeArmy() {
+  let shooters = [];
+  
+  for (let i = 0; i < 10; i++) {
+    let shooter = function() {
+      alert(i);
+    };
+    shooters.push(shooter);
+  }
+  
+  return shooters;
+}
+
+let army = makeArmy();
+army[0]();
+army[1](); 
+army[2]();*/
+
+//NFE
+
+//Задача 1
+
+/*function makeCounter () {
+  let count = 0;
+
+  function counter() {
+    count ++;
+  }
+  
+  counter.set = value => count = value;
+
+  counter.decrease = () => count--;
+
+  return counter;
+}
+
+let counter  = makeCounter ();
+
+console.log(counter());
+console.log(counter());
+
+counter.set(10);
+console.log(counter())*/
+
+//Задача 2
+
