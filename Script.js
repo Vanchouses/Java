@@ -203,3 +203,55 @@ console.log(counter())*/
 
 //Задача 2
 
+/*function sum (a) {
+
+  sum = 0;
+
+  function f (b) {
+    sum += b;
+    return f
+  };
+
+  f.toString = function () {
+    return sum
+  };
+  
+  return f
+}
+
+alert(sum(2)(3)(5));*/
+
+//Планирование: setTimeout, setInterval
+
+//Задача 1
+
+/*function printNumbers (from, to) {
+
+  let curent = from;
+
+  let timerId = setInterval(function() {
+    alert(curent);
+
+    if (curent == to) {
+      clearInterval(timerId);
+    }
+
+    curent ++;
+  }, 1000)
+}
+
+function printNumbers (from, to) {
+  let curent = from;
+
+  let timerId = setTimeout (function run() {
+    alert (curent);
+
+    if (curent < to) {
+      timerId = setTimeout(run, 1000)
+    }
+
+    curent ++;
+  }, 1000)
+}
+
+printNumbers(2, 7);*/
