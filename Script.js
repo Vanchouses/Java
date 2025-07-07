@@ -1,3 +1,5 @@
+'use strict';
+
 /*obj = {
     name: "John",
     age: 35,
@@ -255,3 +257,71 @@ function printNumbers (from, to) {
 }
 
 printNumbers(2, 7);*/
+
+// Декораторы и переадресация вызова, call/apply
+//Задача 1
+
+/*function work(a, b) {
+  console.log( a + b );
+}
+
+function spy (func) {
+  function wrapper (...args) {
+    work.calls.push(args);
+    return func.apply(this, args);
+  }
+
+  wrapper.calls = [];
+
+  return wrapper
+}
+
+work = spy(work);
+
+work(1, 2);
+work(4, 5);
+
+for (let args of work.calls) {
+  console.log( 'call:' + args.join() );
+}*/
+// Задача 2
+
+/*function f(x) {
+  alert(x);
+}
+
+function delay (func, ms) {
+
+  return function (...args) {
+    setTimeout(() => func.apply(this, args), ms);
+  };
+}
+
+// создаём обёртки
+let f1000 = delay(f, 1000);
+let f1500 = delay(f, 1500);
+
+f1000("test"); // показывает "test" после 1000 мс
+f1500("test"); // показывает "test" после 1500 мс*/
+
+//Задача 3
+
+/*function alertf(x) {
+  alert(x);
+}
+
+function debounce (func, ms) {
+  let timeout;
+
+  return function () {
+    clearTimeout;
+    timeout = setTimeout(() => func.apply(this, arguments), ms);
+  };
+}
+
+const f = debounce(alertf, 1000);
+f("a")
+setTimeout( () => alertf("b"), 200);
+setTimeout( () => alertf("c"), 500);*/
+
+
