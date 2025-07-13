@@ -259,6 +259,7 @@ function printNumbers (from, to) {
 printNumbers(2, 7);*/
 
 // Декораторы и переадресация вызова, call/apply
+
 //Задача 1
 
 /*function work(a, b) {
@@ -284,6 +285,7 @@ work(4, 5);
 for (let args of work.calls) {
   console.log( 'call:' + args.join() );
 }*/
+
 // Задача 2
 
 /*function f(x) {
@@ -366,3 +368,269 @@ let f1000 = throttle(f, 2000);
 f1000(1);
 f1000(2);
 f1000(3);*/ 
+
+//Прототипное наследование
+
+//Задача 4 
+
+/*let hamster = {
+
+  eat(food) {
+    this.stomach.push(food);
+  }
+};
+
+let speedy = {
+    stomach: [],
+  __proto__: hamster
+};
+
+let lazy = {
+    stomach: [],
+  __proto__: hamster
+};
+
+// Этот хомяк нашёл еду
+speedy.eat("apple");
+alert( speedy.stomach ); // apple
+
+// У этого хомяка тоже есть еда. Почему? Исправьте
+alert( lazy.stomach );*/
+
+// F.prototype
+
+//Задача 2
+
+/*function Object (name) {
+  this.name = name;
+}
+
+let obj = new Object('John');
+
+let obj2 = new obj.constructor('Pete');
+
+alert(obj2.name)*/
+
+// Встроенные прототипы
+
+//Задача 1
+
+/*function f() {
+  alert("Hello!");
+}
+
+Function.prototype.defer = function (ms) {
+  setTimeout (this , ms);
+}
+
+f.defer(1000);*/
+
+
+// Задача 2
+
+/*function f(a, b) {
+  alert( a + b );
+}
+
+Function.prototype.defer = function (ms) {
+  let func = this;
+  return function (...args) {
+    setTimeout(() => func.apply(this, args), ms);
+  };
+};
+
+f.defer(1000)(1, 2);*/
+
+// Методы прототипов, объекты без свойства __proto__
+
+//Задача 1
+
+/*let dictionary = Object.create(null, {
+  toString:{
+    value () {
+      return Object.keys(this).join();
+    }
+  }
+});
+
+dictionary.apple = "Apple";
+dictionary.__proto__ = "test";
+
+for(let key in dictionary) {
+  alert(key);
+}
+
+alert(dictionary);*/
+
+/*(function Rabbit(name) {
+  this.name = name;
+}
+Rabbit.prototype.sayHi = function() {
+  alert( this.name );
+}
+
+let rabbit = new Rabbit("Rabbit");
+
+rabbit.sayHi();                      
+Rabbit.prototype.sayHi(); 
+Object.getPrototypeOf(rabbit).sayHi();
+rabbit.__proto__.sayHi();*/    
+
+
+// Класс: базовый синтаксис
+
+// Задача 1
+
+/*class Clock {
+  constructor({ template }) {
+    this.template = template;
+  }
+
+  render() {
+    let date = new Date();
+
+    let hours = date.getHours();
+    if (hours < 10) hours = '0' + hours;
+
+    let mins = date.getMinutes();
+    if (mins < 10) mins = '0' + mins;
+
+    let secs = date.getSeconds();
+    if (secs < 10) secs = '0' + secs;
+
+    let output = this.template
+      .replace('h', hours)
+      .replace('m', mins)
+      .replace('s', secs);
+
+    console.log(output);
+  }
+
+  stop() {
+    clearInterval(this.timer);
+  }
+
+  start() {
+    this.render();
+    this.timer = setInterval(() => this.render(), 1000);
+  }
+}
+
+
+let clock = new Clock({template: 'h:m:s'});
+clock.start();*/
+
+// Наследование классов
+
+/*class Animal {
+  constructor(name) {
+    this.speed = 0;
+    this.name = name;
+  }
+
+  run (speed) {
+    this.speed = speed;
+    alert (`${this.name} бежит со скоростью ${this.speed} км/ч`);
+  }
+
+  stop () {
+    this.speed = 0;
+    alert(`${this.name} остановился`);
+  }
+}
+
+class Rabbit extends Animal {
+
+  constructor (name, earLength) {
+    super(name);
+    this.earLength = earLength;
+  }
+
+  hide () {
+    alert(`${this.name} прячется`);
+  }
+
+  stop () {
+    super.stop();
+    this.hide();
+  }
+}
+
+let rabbit = new Rabbit('Белый кролик', 20);
+
+rabbit.run(5);
+rabbit.stop();
+console.log(rabbit.earLength);*/
+
+// Задача 1
+
+/*class Animal {
+
+  constructor(name) {
+    this.name = name;
+  }
+
+}
+
+class Rabbit extends Animal {
+  constructor(name) {
+    super(name);
+    this.created = Date.now();
+  }
+}
+
+let rabbit = new Rabbit("Белый кролик");
+alert(rabbit.name);*/
+
+// Задача 2
+
+/*class Clock {
+  constructor({ template }) {
+    this.template = template;
+  }
+
+  render() {
+    let date = new Date();
+
+    let hours = date.getHours();
+    if (hours < 10) hours = '0' + hours;
+
+    let mins = date.getMinutes();
+    if (mins < 10) mins = '0' + mins;
+
+    let secs = date.getSeconds();
+    if (secs < 10) secs = '0' + secs;
+
+    let output = this.template
+      .replace('h', hours)
+      .replace('m', mins)
+      .replace('s', secs);
+
+    console.log(output);
+  }
+
+  stop() {
+    clearInterval(this.timer);
+  }
+
+  start() {
+    this.render();
+    this.timer = setInterval(() => this.render(), 1000);
+  }
+}
+
+class ExtendedClock extends Clock {
+  constructor ({ template, precision = 1000 }) {
+    super({template});
+    this.precision = precision;
+  }
+
+  start () {
+    this.render();
+    this.timer = setInterval(() => this.render(), this.precision) ;
+  }
+}
+
+let clock = new ExtendedClock({template: 'h:m:s'});
+
+clock.start();*/
