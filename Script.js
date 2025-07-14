@@ -634,3 +634,92 @@ class ExtendedClock extends Clock {
 let clock = new ExtendedClock({template: 'h:m:s'});
 
 clock.start();*/
+
+// Статические свойства и методы
+
+/*class Article {
+  constructor (title, date) {
+    this.title = title;
+    this.date = date;
+  }
+
+  static compare (articalA, articalB) {
+    return articalA.date - articalB.date;
+  }
+
+  static creatTodays () {
+    return new this ('React', new Date())
+  }
+}
+
+let articles = [
+  new Article('HTML', new Date (2019, 1, 1)),
+  new Article('CSS', new Date (2019, 0, 1)),
+  new Article('JavaScript', new Date (2019, 11, 1))
+];
+
+articles.sort(Article.compare);
+let todayArticle = Article.creatTodays();
+
+alert(articles[0].title);
+alert(todayArticle.title);*/
+
+// Задача 1
+
+/*class Rabbit extends Object {
+  constructor(name) {
+    super();
+    this.name = name;
+  }
+}
+
+let rabbit = new Rabbit("Кроль");
+
+alert( rabbit.hasOwnProperty('name') );*/
+
+// Приватные и защищённые методы и свойства
+
+/*class CofeeMachine {
+  _waterAmount = 0;
+
+  set waterAmount(value) {
+    if (value < 0) throw new Error ("Отрицательное количество воды");
+    this._waterAmount = value;
+  }
+
+  get waterAmount (){
+    return this._waterAmount  
+  }
+
+  constructor (power) {
+    this._power = power;
+  }
+
+  get power() {
+    return this._power
+  }
+}
+
+let cofeeMachine = new CofeeMachine(100);
+
+alert(`Мощность: ${cofeeMachine.power}W`);*/
+
+/*class CoffeeMachine {
+
+  #waterAmount = 200;
+
+  get waterAmount () {
+    return this.#waterAmount;
+  }
+
+  set waterAmount(value) {
+    if (value < 0) throw new Error("Отрицательный уровень воды");
+    this.#waterAmount = value;
+  }
+}
+
+let machine = new CoffeeMachine();
+
+machine.waterAmount = 100;
+alert(machine.#waterAmount);*/
+
