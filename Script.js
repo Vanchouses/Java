@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /*obj = {
     name: "John",
@@ -9,7 +9,7 @@
 }
 
 obj.sayHello();*/
-//Рекурсия 
+//Рекурсия
 //Задача 1
 
 /*function sumTo (n) {
@@ -326,7 +326,6 @@ f("a")
 setTimeout( () => alertf("b"), 200);
 setTimeout( () => alertf("c"), 500);*/
 
-
 //Задача 4
 
 /*function f(x) {
@@ -367,11 +366,11 @@ let f1000 = throttle(f, 2000);
 
 f1000(1);
 f1000(2);
-f1000(3);*/ 
+f1000(3);*/
 
 //Прототипное наследование
 
-//Задача 4 
+//Задача 4
 
 /*let hamster = {
 
@@ -425,7 +424,6 @@ Function.prototype.defer = function (ms) {
 
 f.defer(1000);*/
 
-
 // Задача 2
 
 /*function f(a, b) {
@@ -474,8 +472,7 @@ let rabbit = new Rabbit("Rabbit");
 rabbit.sayHi();                      
 Rabbit.prototype.sayHi(); 
 Object.getPrototypeOf(rabbit).sayHi();
-rabbit.__proto__.sayHi();*/    
-
+rabbit.__proto__.sayHi();*/
 
 // Класс: базовый синтаксис
 
@@ -728,7 +725,6 @@ alert(machine.#waterAmount);*/
 // class Rabbit {}
 // let rabbit = new Rabbit ();
 
-
 // alert (rabbit instanceof Rabbit);
 
 // class Animal {
@@ -763,8 +759,7 @@ alert(machine.#waterAmount);*/
 
 // new User("Петя").sayHi();
 
-
-let eventMixin = {
+/*let eventMixin = {
 
   on (eventName, handler) {
     if (!this._eventHandlers) this._eventHandlers = {};
@@ -805,6 +800,35 @@ let menu = new Menu();
 
 menu.on("select", value => alert(`Выбранное значение ${value}`));
 
-menu.choose("JavaScript");
+menu.choose("JavaScript");*/
 
+class Human {
+  constructor(name) {
+    this.name = name;
+  }
 
+  sayHi() {
+    alert(`Hello ${this.name}`);
+  }
+
+  sayBye() {
+    alert(`Bye ${this.name}`);
+  }
+}
+
+class Person extends Human {
+  constructor(name, hairColor) {
+    super(name);
+    this.hairColor = hairColor;
+  }
+
+  sayYourHairColor() {
+    alert(`Мой цвет волос ${this.hairColor}`);
+  }
+}
+
+let user1 = new Person("John", "рыжий");
+
+user1.sayHi();
+user1.sayYourHairColor();
+user1.sayBye();
