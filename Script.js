@@ -802,33 +802,25 @@ menu.on("select", value => alert(`Выбранное значение ${value}`)
 
 menu.choose("JavaScript");*/
 
-class Human {
-  constructor(name) {
-    this.name = name;
-  }
+// Обработка ошибок, "try..catch"
 
-  sayHi() {
-    alert(`Hello ${this.name}`);
-  }
+// let json = "Неправельный JSON с сервера";
 
-  sayBye() {
-    alert(`Bye ${this.name}`);
+// try {
+//   JSON.parse(json);
+// } catch (err) {
+//   alert("Нам не удалось получить данные с сервера, попробуем повторить запрос");
+//   alert(err);
+// }
+
+let json = '{"age": 45}';
+
+try {
+  let user = JSON.parse(json);
+
+  if (!user.name) {
+    throw new SyntaxError("Данные неполны: нет имеени");
   }
+} catch (e) {
+  alert("JSON Error : " + e.message);
 }
-
-class Person extends Human {
-  constructor(name, hairColor) {
-    super(name);
-    this.hairColor = hairColor;
-  }
-
-  sayYourHairColor() {
-    alert(`Мой цвет волос ${this.hairColor}`);
-  }
-}
-
-let user1 = new Person("John", "рыжий");
-
-user1.sayHi();
-user1.sayYourHairColor();
-user1.sayBye();
