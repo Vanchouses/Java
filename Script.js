@@ -824,3 +824,127 @@ menu.choose("JavaScript");*/
 // } catch (e) {
 //   alert("JSON Error : " + e.message);
 // }
+
+// Пользовательские ошибки, расширение Error
+
+// class ValidationError extends Error {
+//   constructor(message) {
+//     super(message);
+//     this.name = "ValidationError";
+//   }
+// }
+
+// class PropertyRequiredError extends ValidationError {
+//   constructor(property) {
+//     super("Нет свойства: " + property);
+//     this.name = "PropertyRequiredError";
+//     this.property = property;
+//   }
+// }
+
+// function readuser(json) {
+//   let user = JSON.parse(json);
+
+//   if (!user.age) {
+//     throw new PropertyRequiredError("Нет поля age!");
+//   }
+
+//   if (!user.name) {
+//     throw new PropertyRequiredError("Нет поля name!");
+//   }
+
+//   return user;
+// }
+
+// try {
+//   let user = readuser('{"age": 30}');
+// } catch (err) {
+//   if (err instanceof ValidationError) {
+//     alert("Нееккоректные данные: " + err.message);
+//     alert(err.name);
+//     alert(err.property);
+//   } else if (err instanceof SyntaxError) {
+//     alert("JSON ошибка синьаксиса :" + err.message);
+//   } else {
+//     throw err;
+//   }
+// }
+
+// class ReadError extends Error {
+//   constructor(message, cause) {
+//     super(message);
+//     this.cause = cause;
+//     this.name = "ReadError";
+//   }
+// }
+
+// class ValidationError extends Error {
+//   /*...*/
+// }
+// class PropertyRequiredError extends ValidationError {
+//   /* ... */
+// }
+
+// function validateUser(user) {
+//   if (!user.age) {
+//     throw new PropertyRequiredError("age");
+//   }
+
+//   if (!user.name) {
+//     throw new PropertyRequiredError("name");
+//   }
+// }
+
+// function readUser(json) {
+//   let user;
+
+//   try {
+//     user = JSON.parse(json);
+//   } catch (err) {
+//     if (err instanceof SyntaxError) {
+//       throw new ReadError("Синтаксическая ошибка", err);
+//     } else {
+//       throw err;
+//     }
+//   }
+
+//   try {
+//     validateUser(user);
+//   } catch (err) {
+//     if (err instanceof ValidationError) {
+//       throw new ReadError("Ошибка валидации", err);
+//     } else {
+//       throw err;
+//     }
+//   }
+// }
+
+// try {
+//   readUser("{bad json}");
+// } catch (e) {
+//   if (e instanceof ReadError) {
+//     alert(e);
+//     // Исходная ошибка: SyntaxError:Unexpected token b in JSON at position 1
+//     alert("Исходная ошибка: " + e.cause);
+//   } else {
+//     throw e;
+//   }
+// }
+
+// задача 1
+
+// class FormatError extends SyntaxError {
+//   constructor(message) {
+//     super(message);
+//     this.name = "FormatError";
+//   }
+// }
+
+// let err = new FormatError("ошибка форматирования");
+
+// alert(err.message); // ошибка форматирования
+// alert(err.name); // FormatError
+// alert(err.stack); // stack
+
+// alert(err instanceof FormatError); // true
+// alert(err instanceof SyntaxError); // true (потому что наследует от SyntaxError)
