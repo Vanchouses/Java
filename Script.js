@@ -813,14 +813,14 @@ menu.choose("JavaScript");*/
 //   alert(err);
 // }
 
-let json = '{"age": 45}';
+// let json = '{"age": 45}';
 
-try {
-  let user = JSON.parse(json);
+// try {
+//   let user = JSON.parse(json);
 
-  if (!user.name) {
-    throw new SyntaxError("Данные неполны: нет имеени");
-  }
-} catch (e) {
-  alert("JSON Error : " + e.message);
-}
+//   if (!user.name) {
+//     throw new SyntaxError("Данные неполны: нет имеени");
+//   }
+// } catch (e) {
+//   alert("JSON Error : " + e.message);
+// }
