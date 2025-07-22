@@ -948,3 +948,302 @@ menu.choose("JavaScript");*/
 
 // alert(err instanceof FormatError); // true
 // alert(err instanceof SyntaxError); // true (потому что наследует от SyntaxError)
+
+// Введение: колбэки
+
+// function loadScript(src, callback) {
+//   let script = document.createElement("script");
+//   script.src = src;
+//   script.onload = () => callback(script);
+//   script.onerror = () =>
+//     callback(new Error(`Не удалось загрузить скрипт ${src}`));
+//   document.head.append(script);
+// }
+
+// loadScript("http://127.0.0.1:5500/index.html", (script) => {
+//   alert(`${script.src}`);
+//   alert("_");
+// });
+
+// Промисы
+
+// let promise = new Promise(function (resolve, reject) {
+//   setTimeout(() => resolve("done"), 1000);
+// });
+
+// promise.then(
+//   function (result) {
+//     /*Выполнит если промис успешно завершится */
+//   },
+//   function (error) {
+//     /*Выполнит при завершении с ошибкой */
+//   }
+// );
+
+// Случай без ошибки
+// let promise = new Promise(function (resolve, relect) {
+//   setTimeout(() => {
+//     resolve("done");
+//   }, 1000);
+// });
+
+// promise.then(
+//   (result) => alert(result),
+//   (error) => alert(error)
+// );
+
+// Случай с ошибкой
+
+// let promise = new Promise(function (resolve, reject) {
+//   setTimeout(() => reject(new Error("Woops")), 4000);
+// });
+
+// promise.finally(alert("Промис завершен"));
+
+// promise.then(
+//   (result) => alert(result),
+//   (error) => alert(error)
+// );
+
+// promise.catch(alert); // Для обработки только ошибок
+
+// function loadScript(src) {
+//   return new Promise(function (resolve, reject) {
+//     let script = document.createElement("script");
+//     script.src = src;
+
+//     script.onload = () => resolve(script);
+//     script.onerror = () => reject(new Error(`Ошибка загрузки скрипта ${src}`));
+
+//     document.head.append(script);
+//   });
+// }
+
+// let promise = loadScript(
+//   "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"
+// );
+
+// promise.then(
+//   (script) => alert(`${script.src} загружен!`),
+//   (error) => alert(`Ошибка : ${error.message}`)
+// );
+
+// promise.then((script) => alert("Ещё один обработчик..."));
+
+// Задача 1
+
+// function delay(ms) {
+//   // return new Promise(function (resolve) {
+//   //   setTimeout(resolve, ms);
+//   // });
+//   return new Promise((resolve) => setTimeout(resolve, ms));
+// }
+
+// delay(3000).then(() => alert("выполнилось через 3 секунды"));
+
+// Задача 2
+
+// function showCircle(cx, cy, radius) {
+//   let div = document.createElement("div");
+//   div.style.width = 0;
+//   div.style.height = 0;
+//   div.style.left = cx + "px";
+//   div.style.top = cy + "px";
+//   div.className = "circle";
+//   document.body.append(div);
+
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       div.style.width = radius * 2 + "px";
+//       div.style.height = radius * 2 + "px";
+
+//       div.addEventListener("transitionend", function handler() {
+//         div.removeEventListener("transitionend", handler);
+//         resolve(div);
+//       });
+//     }, 0);
+//   });
+// }
+
+// function go() {
+//   showCircle(150, 150, 100).then((div) => {
+//     div.classList.add("message-ball");
+//     div.append("Привет, мир!");
+//   });
+// }
+
+// Цепочка промисов
+
+// new Promise(function (resolve, reject) {
+//   setTimeout(() => resolve(1), 1000);
+// })
+//   .then(function (result) {
+//     alert(result);
+//     return result * 2;
+//   })
+//   .then(function (result) {
+//     alert(result);
+//     return result * 2;
+//   })
+//   .then(function (result) {
+//     alert(result);
+//     return result * 2;
+//   });
+
+// new Promise(function (resolve, reject) {
+//   setTimeout(() => resolve(1), 1000);
+// })
+//   .then(function (result) {
+//     alert(result);
+//     return new Promise(function (resolve, reject) {
+//       setTimeout(() => resolve(result * 2), 1000);
+//     });
+//   })
+//   .then(function (result) {
+//     alert(result);
+//     return new Promise(function (resolve, reject) {
+//       setTimeout(() => resolve(result * 2), 1000);
+//     });
+//   })
+//   .then(function (result) {
+//     alert(result);
+//     return new Promise(function (resolve, reject) {
+//       setTimeout(() => resolve(result * 2), 1000);
+//     });
+//   })
+//   .then(function (result) {
+//     alert(result);
+//     return new Promise(function (resolve, reject) {
+//       setTimeout(() => resolve(result * 2), 1000);
+//     });
+//   });
+
+// function loadScript(src) {
+//   return new Promise(function (resolve, reject) {
+//     let script = document.createElement("script");
+//     script.src = src;
+
+//     script.onload = () => resolve(script);
+//     script.onerror = () => reject(new Error(`Ошибка загрузки скрипта ${src}`));
+
+//     document.head.append(script);
+//   });
+// }
+
+// loadScript("/article/promise-chaining/one.js")
+//   .then(function (script) {
+//     return loadScript("/article/promise-chaining/two.js");
+//   })
+//   .then(function (script) {
+//     return loadScript("/article/promise-chaining/three.js");
+//   })
+//   .then(function (script) {
+//     // вызовем функции, объявленные в загружаемых скриптах,
+//     // чтобы показать, что они действительно загрузились
+//     one();
+//     two();
+//     three();
+//   });
+
+// fetch("/article/promise-chaining/user.json")
+//   // .then в коде ниже выполняется, когда удалённый сервер отвечает
+//   .then(function (response) {
+//     // response.text() возвращает новый промис,
+//     // который выполняется и возвращает полный ответ сервера,
+//     // когда он загрузится
+//     return response.text();
+//   })
+//   .then(function (text) {
+//     // ...и здесь содержимое полученного файла
+//     alert(text); // {"name": "iliakan", isAdmin: true}
+//   });
+
+// // Запрашиваем user.json
+// fetch("/article/promise-chaining/user.json")
+//   // Загружаем данные в формате json
+//   .then((response) => response.json())
+//   // Делаем запрос к GitHub
+//   .then((user) => fetch(`https://api.github.com/users/${user.name}`))
+//   // Загружаем ответ в формате json
+//   .then((response) => response.json())
+//   // Показываем аватар (githubUser.avatar_url) в течение 3 секунд (возможно, с анимацией)
+//   .then((githubUser) => {
+//     let img = document.createElement("img");
+//     img.src = githubUser.avatar_url;
+//     img.className = "promise-avatar-example";
+//     document.body.append(img);
+
+//     setTimeout(() => img.remove(), 3000); // (*)
+//   });
+
+// Promise API
+
+// ***Promise.all***
+
+// Promise.all([
+//   new Promise((resolve) => setTimeout(() => resolve(1), 3000)),
+//   new Promise((resolve) => setTimeout(() => resolve(2), 2000)),
+//   new Promise((resolve) => setTimeout(() => resolve(3), 1000)),
+// ]).then(alert);
+
+// let urls = [
+//   "https://api.github.com/users/iliakan",
+//   "https://api.github.com/users/remy",
+//   "https://api.github.com/users/jeresig",
+// ];
+
+// let requests = urls.map((url) => fetch(url));
+
+// Promise.all(requests).then((responses) =>
+//   responses.forEach((response) => alert(`${response.url}: ${response.status}`))
+// );
+
+// let names = ["iliakan", "remy", "jeresig"];
+
+// let requests = names.map((name) =>
+//   fetch(`https://api.github.com/users/${name}`)
+// );
+
+// Promise.all(requests)
+//   .then((responses) => {
+//     for (let response of responses) {
+//       alert(`${response.url}: ${response.status}`);
+//     }
+
+//     return responses;
+//   })
+//   .then((responses) => Promise.all(responses.map((r) => r.json())))
+//   .then((users) => users.forEach((user) => alert(user.name)));
+
+// ***Promise.allSettled
+
+// let urls = [
+//   "https://api.github.com/users/iliakan",
+//   "https://api.github.com/users/remy",
+//   "https://no-such-url",
+// ];
+
+// Promise.allSettled(urls.map((url) => fetch(url))).then((results) => {
+//   results.forEach((result, num) => {
+//     if (result.status == "fulfilled") {
+//       alert(`${urls[num]}: ${result.value.status}`);
+//     }
+//     if (result.status == "rejected") {
+//       alert(`${urls[num]}: ${result.reason}`);
+//     }
+//   });
+// });
+
+// ***Полифил Promise.allSettled***
+
+// if(!Promise.allSettled) {
+//   Promise.allSettled = function(promises) {
+//     return Promise.all(promises.map(p => Promise.resolve(p).then(value => ({
+//       status: 'fulfilled',
+//       value: value
+//     }), error => ({
+//       status: 'rejected',
+//       reason: error
+//     }))));
+//   };
+// }
